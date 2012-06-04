@@ -1,0 +1,11 @@
+{
+  "name": "playing_with_ntwitter",
+  "version": "0.0.1",
+  "engines": {
+    "node": "0.6.6"
+  },
+  "dependencies":{
+    "ntwitter": ">=0.3.0",
+    "mongoose": ">=2.6.5"
+  }
+}
