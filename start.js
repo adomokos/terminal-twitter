@@ -9,7 +9,7 @@ var twit = new Twitter({
 });
 
 twit.verifyCredentials(function (err, data) {
-  console.log("... authenticated");
+  // console.log("... authenticated");
 });
 
 twit.getMentions(function(err, data) {
@@ -30,7 +30,9 @@ twit.rateLimitStatus(function(err, data) {
   console.log(data);
 });
 
+
 twit.getHomeTimeline(function(err, data) {
+  console.log('\nHome Timeline\n');
   var i;
   var message;
   for(i = 0; i < data.length; i++) {
