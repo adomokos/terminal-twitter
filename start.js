@@ -1,10 +1,11 @@
-var Twitter = require('ntwitter');
+var Twitter = require('ntwitter')
+  , config = require('./config');
 
 var twit = new Twitter({
-  consumer_key: 'WiADWUzHNpngVnNQr18GoQ',
-  consumer_secret: 'JRJFLlOfTUkIoExtYVUJpdYzmFZIkKI6iqe5xB3KF8',
-  access_token_key: '20173708-FtTCv5XNKYlvJWMPlkfA6C6MMsO1We2dlF84PHFUM',
-  access_token_secret: 'W9A5RHZUj3My4X6fHAoJZPOGNNMb6NWsN1QRYcEPc'
+  consumer_key: config.twitter.consumer_key,
+  consumer_secret: config.twitter.consumer_secret,
+  access_token_key: access_token_key,
+  access_token_secret: access_token_secret
 });
 
 twit.verifyCredentials(function (err, data) {
