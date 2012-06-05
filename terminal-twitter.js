@@ -41,12 +41,6 @@ if (Program.update_status) UpdatesStatus.withText(Program.update_status, twitter
   //console.log(data);
 //});
 
-
-//twitter.updateStatus("Actually, that would be @tjholowaychuk. http://bit.ly/qhlKsi", function(err, data) {
-  //if(err) throw err;
-  //console.log(data);
-//});
-
 //twitter.stream('user', '', function(stream) {
   //stream.on('data', function(data) {
     //console.log(data);
