@@ -11,7 +11,8 @@ var twitter = new Twitter({
 
 var GetsMentions = require('./lib/gets_mentions')
   , GetsHomeTimeline = require('./lib/gets_home_timeline')
-  , UpdatesStatus = require('./lib/updates_status');
+  , UpdatesStatus = require('./lib/updates_status')
+  , GetsRateLimit = require('./lib/gets_rate_limit');
 
 twitter.verifyCredentials(function (err, data) {
   console.log("... authenticated");
@@ -22,27 +23,18 @@ Program
   .option('-m, --mentions', 'Pulls the latest 5 mentions')
   .option('-t, --timeline', 'The latest home timeline')
   .option('-u, --update_status [text]', 'Pushes a status update to Twitter')
+  .option('-r, --rate_limit', 'Twitter\'s rate limit status')
   .parse(process.argv);
 
-if (process.argv.length == 2) {
+if (process.argv.length === 2) {
   GetsHomeTimeline.forUser(twitter);
 }
 else {
   if (Program.mentions) GetsMentions.forUser(twitter);
   if (Program.timeline) GetsHomeTimeline.forUser(twitter);
   if (Program.update_status) UpdatesStatus.withText(Program.update_status, twitter);
+  if (Program.rate_limit) GetsRateLimit.forUser(twitter);
 }
-
-//UpdatesStatus.withText("I
-//twitter.getFollowersIds(function(err, data) {
-  //if (err) throw err;
-
-  //console.log(data);
-//});
-
-//twitter.rateLimitStatus(function(err, data) {
-  //console.log(data);
-//});
 
 //twitter.stream('user', '', function(stream) {
   //stream.on('data', function(data) {
