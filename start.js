@@ -16,12 +16,6 @@ twitter.verifyCredentials(function (err, data) {
 
 GetsMentions.forUser(twitter);
 
-//twitter.getMentions(function(err, data) {
-  //if (err) throw err;
-
-  //console.log(data[0].text);
-//});
-
 /*
 twitter.getFollowersIds(function(err, data) {
   if (err) throw err;
