@@ -1,12 +1,12 @@
 var Program = require('commander')
   , Twitter = require('ntwitter')
-  , Config = require('./config');
+  , config = require('./config');
 
 var twitter = new Twitter({
-  consumer_key: Config.twitter.consumer_key,
-  consumer_secret: Config.twitter.consumer_secret,
-  access_token_key: Config.twitter.access_token_key,
-  access_token_secret: Config.twitter.access_token_secret
+  consumer_key: config.twitter.consumer_key,
+  consumer_secret: config.twitter.consumer_secret,
+  access_token_key: config.twitter.access_token_key,
+  access_token_secret: config.twitter.access_token_secret
 });
 
 var GetsMentions = require('./lib/gets_mentions')
