@@ -1,42 +1,46 @@
-var Twitter = require('ntwitter')
-  , config = require('./config');
+var Program = require('commander')
+  , Twitter = require('ntwitter')
+  , Config = require('./config');
 
 var twitter = new Twitter({
-  consumer_key: config.twitter.consumer_key,
-  consumer_secret: config.twitter.consumer_secret,
-  access_token_key: config.twitter.access_token_key,
-  access_token_secret: config.twitter.access_token_secret
+  consumer_key: Config.twitter.consumer_key,
+  consumer_secret: Config.twitter.consumer_secret,
+  access_token_key: Config.twitter.access_token_key,
+  access_token_secret: Config.twitter.access_token_secret
 });
 
-var GetsMentions = require('./lib/gets_mentions');
+var GetsMentions = require('./lib/gets_mentions')
+  , GetsHomeTimeline = require('./lib/gets_home_timeline')
+  , UpdatesStatus = require('./lib/updates_status');
 
 twitter.verifyCredentials(function (err, data) {
   console.log("... authenticated");
 });
 
-GetsMentions.forUser(twitter);
+Program
+  .version('0.0.1')
+  .option('-m, --mentions', 'Pulls the latest 5 mentions')
+  .option('-t, --timeline', 'The latest home timeline')
+  .option('-u, --update_status [text]', 'Pushes a status update to Twitter')
+  .parse(process.argv);
 
-/*
-twitter.getFollowersIds(function(err, data) {
-  if (err) throw err;
+if (Program.args.length === 0) GetsHomeTimeline.forUser(twitter);
 
-  console.log(data);
-});
-*/
+if (Program.mentions) GetsMentions.forUser(twitter);
+if (Program.timeline) GetsHomeTimeline.forUser(twitter);
+if (Program.update_status) UpdatesStatus.withText(Program.update_status, twitter);
 
-twitter.rateLimitStatus(function(err, data) {
-  console.log(data);
-});
+//UpdatesStatus.withText("I
+//twitter.getFollowersIds(function(err, data) {
+  //if (err) throw err;
 
-twitter.getHomeTimeline(function(err, data) {
-  console.log('\nHome Timeline\n');
-  var i;
-  var message;
-  for(i = 0; i < data.length; i++) {
-    message = "@" + data[i].user.screen_name + ": ";
-    console.log(message + data[i].text);
-  }
-});
+  //console.log(data);
+//});
+
+//twitter.rateLimitStatus(function(err, data) {
+  //console.log(data);
+//});
+
 
 //twitter.updateStatus("Actually, that would be @tjholowaychuk. http://bit.ly/qhlKsi", function(err, data) {
   //if(err) throw err;
