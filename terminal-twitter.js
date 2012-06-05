@@ -24,11 +24,14 @@ Program
   .option('-u, --update_status [text]', 'Pushes a status update to Twitter')
   .parse(process.argv);
 
-if (Program.args.length === 0) GetsHomeTimeline.forUser(twitter);
-
-if (Program.mentions) GetsMentions.forUser(twitter);
-if (Program.timeline) GetsHomeTimeline.forUser(twitter);
-if (Program.update_status) UpdatesStatus.withText(Program.update_status, twitter);
+if (process.argv.length == 2) {
+  GetsHomeTimeline.forUser(twitter);
+}
+else {
+  if (Program.mentions) GetsMentions.forUser(twitter);
+  if (Program.timeline) GetsHomeTimeline.forUser(twitter);
+  if (Program.updateStatus) UpdatesStatus.withText(Program.updateStatus, twitter);
+}
 
 //UpdatesStatus.withText("I
 //twitter.getFollowersIds(function(err, data) {
