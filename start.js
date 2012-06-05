@@ -9,7 +9,7 @@ var twit = new Twitter({
 });
 
 twit.verifyCredentials(function (err, data) {
-  // console.log("... authenticated");
+  console.log("... authenticated");
 });
 
 twit.getMentions(function(err, data) {
@@ -30,7 +30,6 @@ twit.rateLimitStatus(function(err, data) {
   console.log(data);
 });
 
-
 twit.getHomeTimeline(function(err, data) {
   console.log('\nHome Timeline\n');
   var i;
@@ -41,15 +40,13 @@ twit.getHomeTimeline(function(err, data) {
   }
 });
 
-/*
-twit.updateStatus("Trying to ditch Twitter Client for ntwitter: https://github.com/avianflu/ntwitter", function(err, data) {
-  if(err) throw err;
-  console.log(data);
-});
-*/
-
-//twit.stream('statuses/sample', function(stream) {
-  //stream.on('data', function(data) {
-    //console.log(data);
-  //});
+//twit.updateStatus("@veezus: Dude, I saw this on TV when it originally aired ;-). http://bit.ly/GWOlaI", function(err, data) {
+  //if(err) throw err;
+  //console.log(data);
 //});
+
+twit.stream('user', '', function(stream) {
+  stream.on('data', function(data) {
+    console.log(data);
+  });
+});
