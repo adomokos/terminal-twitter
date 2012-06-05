@@ -5,6 +5,7 @@
     "node": "0.6.6"
   },
   "dependencies":{
-    "ntwitter": ">=0.3.0"
+    "ntwitter": ">=0.3.0",
+    "commander": ">=0.6.1"
   }
 }
