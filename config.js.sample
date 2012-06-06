@@ -7,4 +7,6 @@ config.twitter.consumer_secret = 'your consumer secret';
 config.twitter.access_token_key = 'your access token key';
 config.twitter.access_token_secret = 'your access token secret';
 
+config.filteredIds = [];
+
 module.exports = config;
