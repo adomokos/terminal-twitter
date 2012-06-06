@@ -28,13 +28,13 @@ Program
   .parse(process.argv);
 
 if (process.argv.length === 2) {
-  GetsHomeTimeline.withFilter(twitter);
+  GetsHomeTimeline.forUser(twitter, true);
 }
 else {
   if (Program.mentions) GetsMentions.forUser(twitter);
   if (Program.rate_limit) GetsRateLimit.forUser(twitter);
-  if (Program.timeline) GetsHomeTimeline.withFilter(twitter);
-  if (Program.timeline_unfiltered) GetsHomeTimeline.withoutFilter(twitter);
+  if (Program.timeline) GetsHomeTimeline.forUser(twitter, true);
+  if (Program.timeline_unfiltered) GetsHomeTimeline.forUser(twitter, false);
   if (Program.update_status) UpdatesStatus.withText(Program.update_status, twitter);
 }
 
