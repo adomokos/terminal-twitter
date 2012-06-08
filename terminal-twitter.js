@@ -9,10 +9,10 @@ var twitter = new Twitter({
   access_token_secret: config.twitter.access_token_secret
 });
 
-var GetsMentions = require('./lib/gets_mentions')
-  , GetsHomeTimeline = require('./lib/gets_home_timeline')
-  , UpdatesStatus = require('./lib/updates_status')
-  , GetsRateLimit = require('./lib/gets_rate_limit');
+var getsMentions = require('./lib/gets_mentions')
+  , getsHomeTimeline = require('./lib/gets_home_timeline')
+  , updatesStatus = require('./lib/updates_status')
+  , getsRateLimit = require('./lib/gets_rate_limit');
 
 twitter.verifyCredentials(function (err, data) {
   console.log("... authenticated");
@@ -28,14 +28,14 @@ Program
   .parse(process.argv);
 
 if (process.argv.length === 2) {
-  GetsHomeTimeline.forUser(twitter, true);
+  getsHomeTimeline.forUser(twitter, true);
 }
 else {
-  if (Program.mentions) GetsMentions.forUser(twitter);
-  if (Program.rate_limit) GetsRateLimit.forUser(twitter);
-  if (Program.timeline) GetsHomeTimeline.forUser(twitter, true);
-  if (Program.timeline_unfiltered) GetsHomeTimeline.forUser(twitter, false);
-  if (Program.update_status) UpdatesStatus.withText(Program.update_status, twitter);
+  if (Program.mentions) getsMentions.forUser(twitter);
+  if (Program.rate_limit) getsRateLimit.forUser(twitter);
+  if (Program.timeline) getsHomeTimeline.forUser(twitter, true);
+  if (Program.timeline_unfiltered) getsHomeTimeline.forUser(twitter, false);
+  if (Program.update_status) updatesStatus.withText(Program.update_status, twitter);
 }
 
 //twitter.stream('user', '', function(stream) {
