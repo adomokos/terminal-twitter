@@ -12,7 +12,8 @@ var twitter = new Twitter({
 var getsMentions = require('./lib/gets_mentions')
   , getsHomeTimeline = require('./lib/gets_home_timeline')
   , updatesStatus = require('./lib/updates_status')
-  , getsRateLimit = require('./lib/gets_rate_limit');
+  , getsRateLimit = require('./lib/gets_rate_limit')
+  , addsUserToIgnoreList = require('./lib/adds_user_to_ignore_list');
 
 twitter.verifyCredentials(function (err, data) {
   console.log("... authenticated");
@@ -20,6 +21,7 @@ twitter.verifyCredentials(function (err, data) {
 
 Program
   .version('0.0.1')
+  .option('-i, --ignore [userId]', 'Adds the Twitter user ID to the list to be ignored')
   .option('-m, --mentions', 'Pulls the latest 5 mentions')
   .option('-r, --rate_limit', 'Twitter\'s rate limit status')
   .option('-t, --timeline', 'The latest home timeline, filtered')
@@ -31,6 +33,7 @@ if (process.argv.length === 2) {
   getsHomeTimeline.forUser(twitter, true);
 }
 else {
+  if (Program.ignore) addsUserToIgnoreList.withId(Program.ignore);
   if (Program.mentions) getsMentions.forUser(twitter);
   if (Program.rate_limit) getsRateLimit.forUser(twitter);
   if (Program.timeline) getsHomeTimeline.forUser(twitter, true);
