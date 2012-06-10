@@ -11,4 +11,4 @@ config.dataFiles = {};
 
 config.dataFiles.ignoreList = './data/ignored_user_ids.json';
 
-module.exports = config;
+exports = module.exports = config;
