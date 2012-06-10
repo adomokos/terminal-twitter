@@ -2,12 +2,17 @@ var program = require('commander')
   , Twitter = require('ntwitter')
   , config = require('./config');
 
-var twitter = new Twitter({
-  consumer_key: config.twitter.consumer_key,
-  consumer_secret: config.twitter.consumer_secret,
-  access_token_key: config.twitter.access_token_key,
-  access_token_secret: config.twitter.access_token_secret
-});
+if (config.twitter.consumer_key === 'your consumer key') {
+  console.error('*** Please set up your Twitter credentials first in the config.js file! ***');
+  return 1;
+} else {
+  var twitter = new Twitter({
+    consumer_key: config.twitter.consumer_key,
+    consumer_secret: config.twitter.consumer_secret,
+    access_token_key: config.twitter.access_token_key,
+    access_token_secret: config.twitter.access_token_secret
+  });
+};
 
 var getsMentions = require('./lib/gets_mentions')
   , getsHomeTimeline = require('./lib/gets_home_timeline')
