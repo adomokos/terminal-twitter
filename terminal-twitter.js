@@ -1,4 +1,4 @@
-var Program = require('commander')
+var program = require('commander')
   , Twitter = require('ntwitter')
   , config = require('./config');
 
@@ -19,7 +19,7 @@ twitter.verifyCredentials(function (err, data) {
   console.log("... authenticated");
 });
 
-Program
+program
   .version('0.0.1')
   .option('-i, --ignore [userId]', 'Adds the Twitter user ID to the list to be ignored')
   .option('-m, --mentions', 'Pulls the latest 5 mentions')
@@ -33,14 +33,15 @@ if (process.argv.length === 2) {
   getsHomeTimeline.forUser(twitter, true);
 }
 else {
-  if (Program.ignore) addsUserToIgnoreList.withId(Program.ignore);
-  if (Program.mentions) getsMentions.forUser(twitter);
-  if (Program.rate_limit) getsRateLimit.forUser(twitter);
-  if (Program.timeline) getsHomeTimeline.forUser(twitter, true);
-  if (Program.timeline_unfiltered) getsHomeTimeline.forUser(twitter, false);
-  if (Program.update_status) updatesStatus.withText(Program.update_status, twitter);
+  if (program.ignore) addsUserToIgnoreList.withId(program.ignore);
+  if (program.mentions) getsMentions.forUser(twitter);
+  if (program.rate_limit) getsRateLimit.forUser(twitter);
+  if (program.timeline) getsHomeTimeline.forUser(twitter, true);
+  if (program.timeline_unfiltered) getsHomeTimeline.forUser(twitter, false);
+  if (program.update_status) updatesStatus.withText(program.update_status, twitter);
 }
 
+// TODO: Add the streaming option
 //twitter.stream('user', '', function(stream) {
   //stream.on('data', function(data) {
     //console.log(data);
